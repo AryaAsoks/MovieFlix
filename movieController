@@ -1,0 +1,45 @@
+package com.moviefix.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.moviefix.entites.Movie;
+import com.moviefix.services.MovieService;
+
+@Controller
+
+
+public class MovieController {
+	@Autowired
+	MovieService mvsv;
+	@PostMapping("addmovie")
+	public String addMovie(Movie movie)
+	{
+		mvsv.addMovie(movie);
+		return "addmoviesucess";
+	}
+	
+	@GetMapping("viewmovie")
+	
+	public String viewMovie(Model model)
+	{
+		List<Movie> movieList=mvsv.viewMovie();
+		model.addAttribute("movie",movieList);
+		return "viewmovie";
+	}
+@GetMapping("viewmovieuser")
+	
+	public String viewMovieUser(Model model)
+	{
+		List<Movie> movieList=mvsv.viewMovie();
+		model.addAttribute("movie",movieList);
+		return "viewmovieuser";
+	}
+
+
+}
